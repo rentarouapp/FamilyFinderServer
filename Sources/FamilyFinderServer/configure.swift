@@ -8,16 +8,35 @@ public func configure(_ app: Application) async throws {
     // uncomment to serve files from /Public folder
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
     
-    if let dbURL = Environment.get("DATABASE_URL") {
-        print("🚀 DATABASE_URL: \(dbURL)")
+    if let host = Environment.get("DATABASE_HOST") {
+        print("🔌 DATABASE_HOST: \(host)")
     } else {
-        print("⚠️ DATABASE_URL not found in environment")
+        print("⚠️ DATABASE_HOST not found in environment")
+    }
+    
+    if let port = Environment.get("DATABASE_PORT") {
+        print("⚓️ DATABASE_PORT: \(port)")
+    } else {
+        print("⚠️ DATABASE_PORT not found in environment")
     }
     
     if let userName = Environment.get("DATABASE_USERNAME") {
         print("👦 DATABASE_USERNAME: \(userName)")
     } else {
         print("⚠️ DATABASE_USERNAME not found in environment")
+    }
+    
+    if let password = Environment.get("DATABASE_PASSWORD"),
+       password.isEmpty == false {
+        print("㊙️ DATABASE_PASSWORD is available")
+    } else {
+        print("⚠️ DATABASE_PASSWORD not found in environment")
+    }
+    
+    if let name = Environment.get("DATABASE_NAME") {
+        print("📛 DATABASE_NAME: \(name)")
+    } else {
+        print("⚠️ DATABASE_NAME not found in environment")
     }
 
     app.databases.use(DatabaseConfigurationFactory.postgres(configuration: .init(
