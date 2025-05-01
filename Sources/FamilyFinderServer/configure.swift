@@ -20,6 +20,9 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(CreateTodo())
     app.migrations.add(CreateLocation())
     app.migrations.add(SeedLocation())
+    
+    // 外部からアクセスを許可するために必要
+    app.http.server.configuration.hostname = "0.0.0.0"
 
     // register routes
     try routes(app)
