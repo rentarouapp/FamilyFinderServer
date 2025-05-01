@@ -7,6 +7,18 @@ import Vapor
 public func configure(_ app: Application) async throws {
     // uncomment to serve files from /Public folder
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
+    
+    if let dbURL = Environment.get("DATABASE_URL") {
+        print("🚀 DATABASE_URL: \(dbURL)")
+    } else {
+        print("⚠️ DATABASE_URL not found in environment")
+    }
+    
+    if let userName = Environment.get("DATABASE_USERNAME") {
+        print("👦 DATABASE_USERNAME: \(userName)")
+    } else {
+        print("⚠️ DATABASE_USERNAME not found in environment")
+    }
 
     app.databases.use(DatabaseConfigurationFactory.postgres(configuration: .init(
         hostname: Environment.get("DATABASE_HOST") ?? "localhost",
