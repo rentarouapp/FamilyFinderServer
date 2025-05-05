@@ -54,6 +54,8 @@ public func configure(_ app: Application) async throws {
     
     // 外部からアクセスを許可するために必要
     app.http.server.configuration.hostname = "0.0.0.0"
+    // 別のアプリケーションを動かすのでいちおう
+    app.http.server.configuration.port = 8080
 
     // register routes
     try routes(app)
